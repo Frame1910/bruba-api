@@ -52,8 +52,17 @@ export class UserInviteController {
     }
 
     return this.userInviteService.createUserInvite({
-      inviteCode: inviteCode,
-      ...plusOne,
+      invite: {
+        connect: {
+          code: inviteCode,
+        },
+      },
+      user: {
+        connect: {
+          id: plusOne.userId,
+        },
+      },
+      isPlusOne: plusOne.isPlusOne,
     });
   }
 

@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["relationJoins"]
 }
 
 datasource db {
@@ -8,33 +9,37 @@ datasource db {
 }
 
 model User {
-  id        String               @id @default(uuid())
-  firstName String
-  lastName  String
-  mobile    String?
-  email     String?              @unique
-  status    Status
-  relation  RelationType
-  dietary   DietaryRestriction[]
-  createdAt DateTime             @default(now())
-  updatedAt DateTime             @updatedAt
+  id         String               @id @unique @default(uuid())
+  firstName  String
+  lastName   String
+  mobile     String?
+  email      String?              @unique
+  status     Status
+  relation   RelationType
+  dietary    DietaryRestriction[]
+  createdAt  DateTime             @default(now())
+  updatedAt  DateTime             @updatedAt
+  UserInvite UserInvite[]
 
   @@map("users")
 }
 
 model Invite {
-  code         String    @id @unique
+  code         String       @id @unique
   allowPlusOne Boolean
   firstSeenAt  DateTime?
   lastSeenAt   DateTime?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  UserInvite   UserInvite[]
 
   @@map("invites")
 }
 
 model UserInvite {
   userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  invite     Invite   @relation(fields: [inviteCode], references: [code])
   inviteCode String
   isPlusOne  Boolean
   createdAt  DateTime @default(now())

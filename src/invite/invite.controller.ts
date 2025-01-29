@@ -15,7 +15,7 @@ import { UserInviteService } from '../user_invite/user_invite.service';
 export class InviteController {
   constructor(
     private readonly inviteService: InviteService,
-    private readonly userInviteService: UserInviteService
+    private readonly userInviteService: UserInviteService,
   ) {}
 
   @Post('create')
@@ -24,19 +24,17 @@ export class InviteController {
     body: {
       invite: Prisma.InviteCreateInput;
       userInvites?: { userId: string; isPlusOne: boolean }[];
-    }
+    },
   ) {
     const invite = await this.inviteService.createInvite(body.invite);
     if (body.userInvites) {
-      const fullInvites: Prisma.UserInviteCreateInput[] = body.userInvites.map(
-        (userInvite) => ({
+      const fullInvites: Prisma.UserInviteCreateManyInput[] =
+        body.userInvites.map((userInvite) => ({
           ...userInvite,
           inviteCode: invite.code,
-        })
-      );
-      const userInvites = await this.userInviteService.createManyUserInvite(
-        fullInvites
-      );
+        }));
+      const userInvites =
+        await this.userInviteService.createManyUserInvite(fullInvites);
       return {
         ...invite,
         invitees: userInvites,
@@ -48,8 +46,8 @@ export class InviteController {
   @Patch(':code')
   async updateInvite(
     @Body()
-    inviteBody: Prisma.UserUpdateInput,
-    @Param('code') code: string
+    inviteBody: Prisma.InviteUpdateInput,
+    @Param('code') code: string,
   ) {
     return this.inviteService.updateInvite({
       where: { code: code },
