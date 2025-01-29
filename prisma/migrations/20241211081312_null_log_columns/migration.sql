@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "invites" ALTER COLUMN "firstSeenAt" DROP NOT NULL,
+ALTER COLUMN "lastSeenAt" DROP NOT NULL;

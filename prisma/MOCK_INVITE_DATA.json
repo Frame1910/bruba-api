@@ -1,0 +1,62 @@
+[
+  {
+    "code": "740521",
+    "allowPlusOne": true,
+    "firstSeenAt": "2025-04-26T15:39:44Z",
+    "lastSeenAt": "2025-07-26T23:08:58Z"
+  },
+  {
+    "code": "760004",
+    "allowPlusOne": false,
+    "firstSeenAt": "2025-05-20T10:39:31Z",
+    "lastSeenAt": "2025-03-17T23:56:56Z"
+  },
+  {
+    "code": "119858",
+    "allowPlusOne": false,
+    "firstSeenAt": "2025-09-10T18:56:38Z",
+    "lastSeenAt": "2025-02-28T06:30:39Z"
+  },
+  {
+    "code": "650907",
+    "allowPlusOne": true,
+    "firstSeenAt": "2025-02-12T19:14:25Z",
+    "lastSeenAt": "2025-08-15T00:57:52Z"
+  },
+  {
+    "code": "245735",
+    "allowPlusOne": false,
+    "firstSeenAt": "2025-09-13T04:29:20Z",
+    "lastSeenAt": "2025-09-24T14:46:51Z"
+  },
+  {
+    "code": "276570",
+    "allowPlusOne": true,
+    "firstSeenAt": "2025-02-13T09:33:01Z",
+    "lastSeenAt": "2025-04-05T20:03:05Z"
+  },
+  {
+    "code": "530418",
+    "allowPlusOne": false,
+    "firstSeenAt": "2025-03-23T22:47:09Z",
+    "lastSeenAt": "2025-07-25T08:19:13Z"
+  },
+  {
+    "code": "992509",
+    "allowPlusOne": false,
+    "firstSeenAt": "2025-06-23T22:40:29Z",
+    "lastSeenAt": "2025-02-08T22:31:10Z"
+  },
+  {
+    "code": "500294",
+    "allowPlusOne": false,
+    "firstSeenAt": "2025-02-06T20:16:16Z",
+    "lastSeenAt": "2025-03-10T02:18:19Z"
+  },
+  {
+    "code": "915526",
+    "allowPlusOne": true,
+    "firstSeenAt": "2025-02-16T04:25:47Z",
+    "lastSeenAt": "2025-05-10T20:01:09Z"
+  }
+]
