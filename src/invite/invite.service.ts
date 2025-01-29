@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Invite, Prisma } from '@prisma/client';
+import { Invite, Prisma, User } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -51,6 +51,17 @@ export class InviteService {
   async deleteInvite(where: Prisma.InviteWhereUniqueInput): Promise<Invite> {
     return this.prisma.invite.delete({
       where,
+    });
+  }
+
+  async invitees(code: string) {
+    return this.prisma.invite.findUnique({
+      where: { code },
+      include: {
+        UserInvite: {
+          include: { user: true },
+        },
+      },
     });
   }
 }
