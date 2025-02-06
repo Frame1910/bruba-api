@@ -1,33 +1,35 @@
-# Stage 1: Build bunbles
-FROM node:22.12 AS build
+# Stage 1: Build
+FROM node:22.12 AS builder
 
-ENV NODE_ENV=production
-ENV DATABASE_URL="postgresql://postgres:naRBpy6Lp77w@10.10.50.10:5432/bruba?schema=public"
-
-# Create app directory
 WORKDIR /app
 
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-COPY package*.json ./
+# Copy package files first
+COPY package.json package-lock.json ./
 
-# Install app dependencies
-RUN npm install
+# Install dependencies
+RUN npm ci --omit=dev
 
-# Bundle app source
+# Copy application files
 COPY . .
 
-# Creates a "dist" folder with the production build
+# Generate Prisma client before building
+RUN npx prisma generate
+
+# Build NestJS app
 RUN npm run build
 
-# Stage 2: Serve the API with a smaller image
-FROM node:22.12-alpine
+# Stage 2: Production Image
+FROM node:22.12-alpine AS runner
 
-COPY --from=build /app/dist /dist
-COPY package*.json ./
+WORKDIR /app
 
-# Expose the port on which the app will run
-EXPOSE 3000
+# Copy only necessary files
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/prisma ./prisma
+COPY package.json ./
 
+ENV NODE_ENV=production
 
-# Start the server using the production build
-CMD ["npm", "run", "start:prod"]
+# Ensure Prisma client exists before starting
+CMD npx prisma generate && npx prisma migrate deploy && node dist/src/main
