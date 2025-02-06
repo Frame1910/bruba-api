@@ -1,7 +1,8 @@
 services:
-  bruba-local-db:
+  database:
     image: postgres:15
-    container_name: bruba-local-db
+    container_name: postgres_db
+    restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
@@ -9,7 +10,17 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
 
+  backend:
+    image: bruba-api:latest
+    container_name: nestjs_app
+    environment:
+      DATABASE_URL: postgresql://postgres:admin@database:5432/bruba?schema=public
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    command: [ "sh", "-c", "npx prisma generate && npx prisma migrate deploy && node dist/src/main" ]
+    
 volumes:
-  postgres_data:
+  db_data:
