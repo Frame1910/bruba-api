@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # Install dependencies
-RUN npm ci --omit=dev && \
+RUN npm install --omit=dev && \
     npm install -g @nestjs/cli @types/node
 
 # Copy application files
