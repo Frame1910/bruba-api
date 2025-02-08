@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # Install dependencies
-RUN npm install --omit=dev && \
+RUN npm ci && \
     npm install -g @nestjs/cli @types/node
 
 # Copy application files
@@ -17,7 +17,7 @@ COPY . .
 RUN npx prisma generate
 
 # Build NestJS app
-RUN npm run build
+RUN npm run build --omit=dev
 
 # Stage 2: Production Image
 FROM node:22.12-alpine AS runner
