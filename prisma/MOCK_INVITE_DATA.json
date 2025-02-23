@@ -3,13 +3,15 @@
     "code": "740521",
     "allowPlusOne": true,
     "firstSeenAt": "2025-04-26T15:39:44Z",
-    "lastSeenAt": "2025-07-26T23:08:58Z"
+    "lastSeenAt": "2025-07-26T23:08:58Z",
+    "sportsCarnival": true
   },
   {
     "code": "760004",
     "allowPlusOne": false,
     "firstSeenAt": "2025-05-20T10:39:31Z",
-    "lastSeenAt": "2025-03-17T23:56:56Z"
+    "lastSeenAt": "2025-03-17T23:56:56Z",
+    "sportsCarnival": false
   },
   {
     "code": "119858",
