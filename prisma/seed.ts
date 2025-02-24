@@ -27,21 +27,21 @@ async function main() {
   const invites = await prisma.invite.createManyAndReturn({
     data: [
       {
-        code: '740521',
+        code: '000000',
         allowPlusOne: true,
         firstSeenAt: '2025-04-26T15:39:44Z',
         lastSeenAt: '2025-07-26T23:08:58Z',
         sportsCarnival: false,
       },
       {
-        code: '760004',
+        code: '111111',
         allowPlusOne: false,
         firstSeenAt: '2025-05-20T10:39:31Z',
         lastSeenAt: '2025-03-17T23:56:56Z',
         sportsCarnival: true,
       },
       {
-        code: '119858',
+        code: '696969',
         allowPlusOne: false,
         firstSeenAt: '2025-09-10T18:56:38Z',
         lastSeenAt: '2025-02-28T06:30:39Z',
@@ -53,25 +53,20 @@ async function main() {
   const singlePlusOne = [
     {
       userId: users[0].id,
-      inviteCode: '740521',
+      inviteCode: '000000',
       isPlusOne: false,
-    },
-    {
-      userId: users[1].id,
-      inviteCode: '740521',
-      isPlusOne: true,
-    },
+    }
   ];
 
   const couple = [
     {
       userId: users[2].id,
-      inviteCode: '760004',
+      inviteCode: '111111',
       isPlusOne: false,
     },
     {
       userId: users[3].id,
-      inviteCode: '760004',
+      inviteCode: '111111',
       isPlusOne: false,
     },
   ];
@@ -79,7 +74,7 @@ async function main() {
   const singleNoPlusOne = [
     {
       userId: users[4].id,
-      inviteCode: '119858',
+      inviteCode: '696969',
       isPlusOne: false,
     },
   ];
