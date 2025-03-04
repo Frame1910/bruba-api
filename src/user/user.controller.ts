@@ -13,6 +13,7 @@ import {
   RelationType,
   Status,
   DietaryRestriction,
+  InviteStatus,
 } from '@prisma/client';
 
 @Controller('users')
@@ -28,17 +29,27 @@ export class UserController {
       lastName: string;
       mobile?: string | null;
       email?: string | null;
+      inviteCode?: string;
+      isPlusOne?: boolean;
+      inviteStatus: string;
       status: string;
       relation: string;
       dietary?: string[];
     },
   ) {
-    const user = {
+    const user: Prisma.UserCreateInput = {
       id: user_body.id,
       firstName: user_body.firstName,
       lastName: user_body.lastName,
       mobile: user_body.mobile,
       email: user_body.email,
+      invite: {
+        connect: {
+          code: user_body.inviteCode,
+        },
+      },
+      isPlusOne: user_body.isPlusOne,
+      inviteStatus: user_body.inviteStatus as InviteStatus,
       status: user_body.status as Status,
       relation: user_body.relation as RelationType,
       dietary: user_body.dietary.map(

@@ -11,14 +11,10 @@ import {
 } from '@nestjs/common';
 import { InviteService } from './invite.service';
 import { Prisma } from '@prisma/client';
-import { UserInviteService } from '../user_invite/user_invite.service';
 
 @Controller('invites')
 export class InviteController {
-  constructor(
-    private readonly inviteService: InviteService,
-    private readonly userInviteService: UserInviteService,
-  ) {}
+  constructor(private readonly inviteService: InviteService) {}
 
   @Post('create')
   async createInvite(
@@ -29,19 +25,6 @@ export class InviteController {
     },
   ) {
     const invite = await this.inviteService.createInvite(body.invite);
-    if (body.userInvites) {
-      const fullInvites: Prisma.UserInviteCreateManyInput[] =
-        body.userInvites.map((userInvite) => ({
-          ...userInvite,
-          inviteCode: invite.code,
-        }));
-      const userInvites =
-        await this.userInviteService.createManyUserInvite(fullInvites);
-      return {
-        ...invite,
-        invitees: userInvites,
-      };
-    }
     return invite;
   }
 

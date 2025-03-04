@@ -58,35 +58,33 @@ export class InviteService {
     return this.prisma.invite.findUnique({
       where: { code },
       include: {
-        UserInvite: {
-          include: { user: true },
-        },
+        User: true,
       },
     });
   }
 
   async inviteStats() {
-    const total = await this.prisma.userInvite.aggregate({
+    const total = await this.prisma.user.aggregate({
       _count: true,
     });
 
-    const accepted = await this.prisma.userInvite.aggregate({
+    const accepted = await this.prisma.user.aggregate({
       where: {
-        status: 'ACCEPTED',
+        inviteStatus: 'ACCEPTED',
       },
       _count: true,
     });
 
-    const pending = await this.prisma.userInvite.aggregate({
+    const pending = await this.prisma.user.aggregate({
       where: {
-        status: 'PENDING',
+        inviteStatus: 'PENDING',
       },
       _count: true,
     });
 
-    const declined = await this.prisma.userInvite.aggregate({
+    const declined = await this.prisma.user.aggregate({
       where: {
-        status: 'DECLINED',
+        inviteStatus: 'DECLINED',
       },
       _count: true,
     });

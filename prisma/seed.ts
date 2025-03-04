@@ -1,29 +1,7 @@
-import { Prisma, PrismaClient } from '@prisma/client';
-import * as fs from 'fs';
+import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-const rawUserData: any[] = JSON.parse(
-  fs.readFileSync('prisma/MOCK_USER_DATA.json', 'utf-8'),
-);
-
-const userData = rawUserData.map((user): Prisma.UserCreateManyInput => {
-  return {
-    firstName: user.firstName,
-    lastName: user.lastName,
-    mobile: user.mobile,
-    email: user.email,
-    status: user.status,
-    relation: user.relation,
-    dietary: [user.dietary],
-  };
-});
-
 async function main() {
-  // Creating users
-  const users = await prisma.user.createManyAndReturn({
-    data: userData,
-  });
-
   const invites = await prisma.invite.createManyAndReturn({
     data: [
       {
@@ -49,50 +27,45 @@ async function main() {
       },
     ],
   });
-
-  const singlePlusOne = [
-    {
-      userId: users[0].id,
-      inviteCode: '000000',
-      isPlusOne: false,
-    }
-  ];
-
-  const couple = [
-    {
-      userId: users[2].id,
-      inviteCode: '111111',
-      isPlusOne: false,
-    },
-    {
-      userId: users[3].id,
-      inviteCode: '111111',
-      isPlusOne: false,
-    },
-  ];
-
-  const singleNoPlusOne = [
-    {
-      userId: users[4].id,
-      inviteCode: '696969',
-      isPlusOne: false,
-    },
-  ];
-
-  // const userInviteData = sampleInvites.map((invite) => {
-  //   return sampleUsers.map((user) => {
-  //     return {
-  //       userId: user.id,
-  //       inviteCode: invite.code,
-  //       isPlusOne: false,
-  //     };
-  //   });
-  // });
-
-  const combined_data = [...singlePlusOne, ...couple, ...singleNoPlusOne];
-
-  const userInvite = await prisma.userInvite.createMany({
-    data: combined_data,
+  const users = await prisma.user.createMany({
+    data: [
+      {
+        firstName: 'Paige',
+        lastName: 'Kniveton',
+        mobile: '4846559663',
+        email: 'pkniveton0@google.fr',
+        relation: 'FRIEND',
+        inviteCode: '000000',
+        isPlusOne: false,
+      },
+      {
+        firstName: 'Elton',
+        lastName: 'Bilborough',
+        mobile: '8921586709',
+        email: 'ebilborough1@people.com.cn',
+        relation: 'FRIEND',
+        inviteCode: '111111',
+        isPlusOne: false,
+      },
+      {
+        firstName: 'Adham',
+        lastName: 'Duggen',
+        mobile: '6544334641',
+        email: 'aduggen2@yellowpages.com',
+        relation: 'PARENT',
+        inviteCode: '111111',
+        isPlusOne: false,
+      },
+      {
+        firstName: 'Rex',
+        lastName: 'Ealles',
+        mobile: '9516947197',
+        email: 'realles3@google.com.au',
+        relation: 'PARENT',
+        inviteCode: '696969',
+        isPlusOne: false,
+      },
+    ],
   });
 }
 
