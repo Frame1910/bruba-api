@@ -6,6 +6,8 @@ import {
   Param,
   Patch,
   Post,
+  Query,
+  Res,
 } from '@nestjs/common';
 import { InviteService } from './invite.service';
 import { Prisma } from '@prisma/client';
@@ -55,6 +57,28 @@ export class InviteController {
     });
   }
 
+  @Patch(':code/last-seen')
+  async updateLastSeen(
+    @Param('code') code: string,
+    @Query('lastSeenAt') lastSeenAt: Date,
+  ) {
+    return this.inviteService.updateInvite({
+      where: { code: code },
+      data: { lastSeenAt },
+    });
+  }
+
+  @Patch(':code/first-seen')
+  async updateFirstSeen(
+    @Param('code') code: string,
+    @Query('firstSeenAt') firstSeenAt: Date,
+  ) {
+    return this.inviteService.updateInvite({
+      where: { code: code },
+      data: { firstSeenAt },
+    });
+  }
+
   @Delete(':code')
   async deleteInvite(@Param('code') code: string) {
     return this.inviteService.deleteInvite({ code: code });
@@ -66,8 +90,16 @@ export class InviteController {
   }
 
   @Get(':code')
-  async getInvite(@Param('code') code: string) {
-    return this.inviteService.invite({ code: code });
+  async getInvite(@Res() res, @Param('code') code: string) {
+    console.log('Code:', code);
+    const invite = await this.inviteService.invite({ code: code });
+    if (invite) {
+      console.log('Invite found:', invite);
+      return res.status(200).send(invite);
+    } else {
+      console.log('Invite not found');
+      return res.status(404).send('Invite not found');
+    }
   }
 
   @Get(':code/invitees')
