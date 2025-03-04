@@ -39,12 +39,13 @@ model Invite {
 
 model UserInvite {
   userId     String
-  user       User     @relation(fields: [userId], references: [id])
-  invite     Invite   @relation(fields: [inviteCode], references: [code])
+  user       User         @relation(fields: [userId], references: [id])
+  invite     Invite       @relation(fields: [inviteCode], references: [code])
   inviteCode String
+  status     InviteStatus @default(PENDING)
   isPlusOne  Boolean
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
 
   @@id([userId, inviteCode])
   @@map("user_invites")
@@ -53,6 +54,12 @@ model UserInvite {
 enum Status {
   ACTIVE
   INACTIVE
+  PENDING
+}
+
+enum InviteStatus {
+  ACCEPTED
+  DECLINED
   PENDING
 }
 

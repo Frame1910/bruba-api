@@ -106,4 +106,9 @@ export class InviteController {
   async getInvitees(@Param('code') code: string) {
     return this.inviteService.invitees(code);
   }
+
+  @Get('admin/stats')
+  async getStats() {
+    return this.inviteService.inviteStats();
+  }
 }

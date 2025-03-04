@@ -64,4 +64,38 @@ export class InviteService {
       },
     });
   }
+
+  async inviteStats() {
+    const total = await this.prisma.userInvite.aggregate({
+      _count: true,
+    });
+
+    const accepted = await this.prisma.userInvite.aggregate({
+      where: {
+        status: 'ACCEPTED',
+      },
+      _count: true,
+    });
+
+    const pending = await this.prisma.userInvite.aggregate({
+      where: {
+        status: 'PENDING',
+      },
+      _count: true,
+    });
+
+    const declined = await this.prisma.userInvite.aggregate({
+      where: {
+        status: 'DECLINED',
+      },
+      _count: true,
+    });
+
+    return {
+      total: total._count,
+      accepted: accepted._count,
+      pending: pending._count,
+      declined: declined._count,
+    };
+  }
 }
