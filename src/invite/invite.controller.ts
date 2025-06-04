@@ -45,38 +45,12 @@ export class InviteController {
     return invite;
   }
 
-  @Patch(':code')
-  async updateInvite(
-    @Body()
-    inviteBody: Prisma.InviteUpdateInput,
+  @Patch(':code/update-status')
+  async updateInviteStatus(
     @Param('code') code: string,
+    @Body() body: { userId; status: string }[],
   ) {
-    return this.inviteService.updateInvite({
-      where: { code: code },
-      data: inviteBody,
-    });
-  }
-
-  @Patch(':code/last-seen')
-  async updateLastSeen(
-    @Param('code') code: string,
-    @Query('lastSeenAt') lastSeenAt: Date,
-  ) {
-    return this.inviteService.updateInvite({
-      where: { code: code },
-      data: { lastSeenAt },
-    });
-  }
-
-  @Patch(':code/first-seen')
-  async updateFirstSeen(
-    @Param('code') code: string,
-    @Query('firstSeenAt') firstSeenAt: Date,
-  ) {
-    return this.inviteService.updateInvite({
-      where: { code: code },
-      data: { firstSeenAt },
-    });
+    return this.userInviteService.updateManyUserInvite(body, code);
   }
 
   @Delete(':code')
@@ -105,10 +79,5 @@ export class InviteController {
   @Get(':code/invitees')
   async getInvitees(@Param('code') code: string) {
     return this.inviteService.invitees(code);
-  }
-
-  @Get('admin/stats')
-  async getStats() {
-    return this.inviteService.inviteStats();
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { UserInvite, Prisma } from '@prisma/client';
+import { UserInvite, Prisma, $Enums } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -52,6 +52,24 @@ export class UserInviteService {
       data,
       where,
     });
+  }
+
+  async updateManyUserInvite(
+    statuses: { userId: string; status: string }[],
+    inviteCode: string,
+  ) {
+    const updatePromises = statuses.map(({ userId, status }) => {
+      return this.prisma.userInvite.update({
+        where: {
+          userId_inviteCode: {
+            userId: userId,
+            inviteCode: inviteCode, // Assuming all statuses have the same inviteCode
+          },
+        },
+        data: { status: $Enums.InviteStatus[status] },
+      });
+    });
+    return await Promise.all(updatePromises);
   }
 
   async deleteUserInvite(
