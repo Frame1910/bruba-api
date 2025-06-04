@@ -60,12 +60,12 @@ async function main() {
 
   const couple = [
     {
-      userId: users[2].id,
+      userId: users[5].id,
       inviteCode: '111111',
       isPlusOne: false,
     },
     {
-      userId: users[3].id,
+      userId: users[6].id,
       inviteCode: '111111',
       isPlusOne: false,
     },
