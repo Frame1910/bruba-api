@@ -2,11 +2,7 @@
   {
     "firstName": "Paige",
     "lastName": "Kniveton",
-    "mobile": "4846559663",
-    "email": "pkniveton0@google.fr",
-    "status": "ACTIVE",
-    "relation": "FRIEND",
-    "dietary": "DAIRY_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Elton",
@@ -21,7 +17,6 @@
     "firstName": "Adham",
     "lastName": "Duggen",
     "mobile": "6544334641",
-    "email": "aduggen2@yellowpages.com",
     "status": "ACTIVE",
     "relation": "PARENT",
     "dietary": "NONE"
