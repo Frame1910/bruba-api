@@ -53,6 +53,14 @@ export class InviteController {
     return this.userInviteService.updateManyUserInvite(body, code);
   }
 
+  @Patch(':code/update-sports-carnival-status')
+  async updateSportsCarnivalStatus(
+    @Param('code') code: string,
+    @Body() body: { userId; scstatus: string }[],
+  ) {
+    return this.userInviteService.updateManyUserSportsCarnival(body, code);
+  }
+
   @Delete(':code')
   async deleteInvite(@Param('code') code: string) {
     return this.inviteService.deleteInvite({ code: code });

@@ -44,6 +44,7 @@ model UserInvite {
   invite     Invite       @relation(fields: [inviteCode], references: [code])
   inviteCode String
   status     InviteStatus @default(PENDING)
+  scstatus   InviteStatus @default(PENDING)
   isPlusOne  Boolean
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt

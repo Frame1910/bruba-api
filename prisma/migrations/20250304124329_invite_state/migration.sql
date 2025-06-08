@@ -9,4 +9,5 @@ CREATE TYPE "InviteStatus" AS ENUM ('ACCEPTED', 'DECLINED', 'PENDING');
 
 -- AlterTable
 ALTER TABLE "user_invites" DROP COLUMN "accepted",
-ADD COLUMN     "status" "InviteStatus" NOT NULL DEFAULT 'PENDING';
+ADD COLUMN     "status" "InviteStatus" NOT NULL DEFAULT 'PENDING',
+ADD COLUMN     "scstatus" "InviteStatus" NOT NULL DEFAULT 'PENDING';

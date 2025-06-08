@@ -72,6 +72,24 @@ export class UserInviteService {
     return await Promise.all(updatePromises);
   }
 
+  async updateManyUserSportsCarnival(
+    statuses: { userId: string; scstatus: string }[],
+    inviteCode: string,
+  ) {
+    const updatePromises = statuses.map(({ userId, scstatus }) => {
+      return this.prisma.userInvite.update({
+        where: {
+          userId_inviteCode: {
+            userId: userId,
+            inviteCode: inviteCode, // Assuming all statuses have the same inviteCode
+          },
+        },
+        data: { scstatus: $Enums.InviteStatus[scstatus] },
+      });
+    });
+    return await Promise.all(updatePromises);
+  }
+
   async deleteUserInvite(
     where: Prisma.UserInviteWhereUniqueInput,
   ): Promise<UserInvite> {
