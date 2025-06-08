@@ -5,7 +5,7 @@ CREATE TYPE "Status" AS ENUM ('ACTIVE', 'INACTIVE', 'PENDING');
 CREATE TYPE "RelationType" AS ENUM ('PARENT', 'CHILD', 'SIBLING', 'SPOUSE', 'FRIEND');
 
 -- CreateEnum
-CREATE TYPE "DietaryRestriction" AS ENUM ('VEGETARIAN', 'VEGAN', 'GLUTEN_FREE', 'DAIRY_FREE', 'NUT_FREE', 'SHELLFISH_FREE', 'OTHER', 'NONE');
+CREATE TYPE "DietaryRestriction" AS ENUM ('VEGETARIAN', 'VEGAN', 'PESCATARIAN', 'GLUTEN_FREE', 'DAIRY_FREE', 'KOSHER', 'HALAL', 'NONE');
 
 -- CreateTable
 CREATE TABLE "users" (
@@ -14,9 +14,10 @@ CREATE TABLE "users" (
     "lastName" TEXT NOT NULL,
     "mobile" TEXT,
     "email" TEXT,
-    "status" "Status" NOT NULL,
-    "relation" "RelationType" NOT NULL,
+    -- "status" "Status" NOT NULL,
+    -- "relation" "RelationType" NOT NULL,
     "dietary" "DietaryRestriction"[],
+    "allergies" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

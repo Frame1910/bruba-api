@@ -24,7 +24,7 @@
     "email": "aduggen2@yellowpages.com",
     "status": "ACTIVE",
     "relation": "PARENT",
-    "dietary": "NUT_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Rex",
@@ -51,7 +51,7 @@
     "email": "bledson5@paypal.com",
     "status": "PENDING",
     "relation": "PARENT",
-    "dietary": "NUT_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Jake",
@@ -87,7 +87,7 @@
     "email": "pmcgee9@vk.com",
     "status": "ACTIVE",
     "relation": "PARENT",
-    "dietary": "NUT_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Torrie",
@@ -114,7 +114,7 @@
     "email": "splaydenc@artisteer.com",
     "status": "PENDING",
     "relation": "CHILD",
-    "dietary": "SHELLFISH_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Lyndel",
@@ -123,7 +123,7 @@
     "email": "lgillivried@tiny.cc",
     "status": "PENDING",
     "relation": "SPOUSE",
-    "dietary": "OTHER"
+    "dietary": "NONE"
   },
   {
     "firstName": "Lynett",
@@ -150,7 +150,7 @@
     "email": "alowdhamg@bandcamp.com",
     "status": "INACTIVE",
     "relation": "SIBLING",
-    "dietary": "OTHER"
+    "dietary": "NONE"
   },
   {
     "firstName": "Vania",
@@ -168,7 +168,7 @@
     "email": "nmelvillei@yahoo.com",
     "status": "INACTIVE",
     "relation": "CHILD",
-    "dietary": "NUT_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Jyoti",
@@ -186,7 +186,7 @@
     "email": "hgalbraithk@sina.com.cn",
     "status": "PENDING",
     "relation": "PARENT",
-    "dietary": "NUT_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Candie",
@@ -231,7 +231,7 @@
     "email": "pwharfep@home.pl",
     "status": "PENDING",
     "relation": "SPOUSE",
-    "dietary": "SHELLFISH_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Olivier",
@@ -240,7 +240,7 @@
     "email": "ofanceq@yahoo.com",
     "status": "INACTIVE",
     "relation": "SPOUSE",
-    "dietary": "NUT_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Caterina",
@@ -258,7 +258,7 @@
     "email": "bstokers@nymag.com",
     "status": "ACTIVE",
     "relation": "CHILD",
-    "dietary": "NUT_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Nathalie",
@@ -285,7 +285,7 @@
     "email": "kcalleryv@surveymonkey.com",
     "status": "ACTIVE",
     "relation": "SPOUSE",
-    "dietary": "OTHER"
+    "dietary": "NONE"
   },
   {
     "firstName": "Maridel",
@@ -303,7 +303,7 @@
     "email": "kquarmbyx@people.com.cn",
     "status": "PENDING",
     "relation": "SPOUSE",
-    "dietary": "NUT_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Bessy",
@@ -321,7 +321,7 @@
     "email": "dbushez@google.com.au",
     "status": "ACTIVE",
     "relation": "PARENT",
-    "dietary": "OTHER"
+    "dietary": "NONE"
   },
   {
     "firstName": "Krissie",
@@ -330,7 +330,7 @@
     "email": "kmilam10@usa.gov",
     "status": "ACTIVE",
     "relation": "SIBLING",
-    "dietary": "OTHER"
+    "dietary": "NONE"
   },
   {
     "firstName": "Candace",
@@ -348,7 +348,7 @@
     "email": "jburnett12@ovh.net",
     "status": "PENDING",
     "relation": "SIBLING",
-    "dietary": "NUT_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Lora",
@@ -375,7 +375,7 @@
     "email": "amarcu15@soup.io",
     "status": "INACTIVE",
     "relation": "PARENT",
-    "dietary": "NUT_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Derby",
@@ -384,7 +384,7 @@
     "email": "dport16@nifty.com",
     "status": "INACTIVE",
     "relation": "SPOUSE",
-    "dietary": "OTHER"
+    "dietary": "NONE"
   },
   {
     "firstName": "Oren",
@@ -402,7 +402,7 @@
     "email": "jwooler18@ucla.edu",
     "status": "PENDING",
     "relation": "SIBLING",
-    "dietary": "OTHER"
+    "dietary": "NONE"
   },
   {
     "firstName": "Marissa",
@@ -429,7 +429,7 @@
     "email": "lashworth1b@netscape.com",
     "status": "INACTIVE",
     "relation": "FRIEND",
-    "dietary": "NUT_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Alli",
@@ -447,7 +447,7 @@
     "email": "mmatiasek1d@ted.com",
     "status": "PENDING",
     "relation": "CHILD",
-    "dietary": "SHELLFISH_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Rodrigo",
@@ -483,7 +483,7 @@
     "email": "cmacdonough1h@clickbank.net",
     "status": "INACTIVE",
     "relation": "CHILD",
-    "dietary": "NUT_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Lillian",
@@ -501,7 +501,7 @@
     "email": "cheugh1j@tinyurl.com",
     "status": "INACTIVE",
     "relation": "CHILD",
-    "dietary": "SHELLFISH_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Conway",
@@ -546,7 +546,7 @@
     "email": "ggiamo1o@state.tx.us",
     "status": "ACTIVE",
     "relation": "SPOUSE",
-    "dietary": "SHELLFISH_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Nat",
@@ -555,7 +555,7 @@
     "email": "nseine1p@altervista.org",
     "status": "INACTIVE",
     "relation": "CHILD",
-    "dietary": "OTHER"
+    "dietary": "NONE"
   },
   {
     "firstName": "Kary",
@@ -573,7 +573,7 @@
     "email": "rcarbery1r@apache.org",
     "status": "ACTIVE",
     "relation": "CHILD",
-    "dietary": "OTHER"
+    "dietary": "NONE"
   },
   {
     "firstName": "Winslow",
@@ -582,7 +582,7 @@
     "email": "wcanner1s@istockphoto.com",
     "status": "PENDING",
     "relation": "CHILD",
-    "dietary": "NUT_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Obediah",
@@ -591,7 +591,7 @@
     "email": "omeredyth1t@hibu.com",
     "status": "ACTIVE",
     "relation": "CHILD",
-    "dietary": "SHELLFISH_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Nelly",
@@ -600,7 +600,7 @@
     "email": "ndruce1u@google.com",
     "status": "PENDING",
     "relation": "CHILD",
-    "dietary": "SHELLFISH_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Quinton",
@@ -618,7 +618,7 @@
     "email": "gbolley1w@reuters.com",
     "status": "ACTIVE",
     "relation": "PARENT",
-    "dietary": "OTHER"
+    "dietary": "NONE"
   },
   {
     "firstName": "Carena",
@@ -636,7 +636,7 @@
     "email": "dfeasley1y@squidoo.com",
     "status": "ACTIVE",
     "relation": "CHILD",
-    "dietary": "SHELLFISH_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Maryellen",
@@ -672,7 +672,7 @@
     "email": "fsaunder22@gov.uk",
     "status": "INACTIVE",
     "relation": "PARENT",
-    "dietary": "NUT_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Far",
@@ -681,7 +681,7 @@
     "email": "fdunstall23@google.fr",
     "status": "ACTIVE",
     "relation": "SPOUSE",
-    "dietary": "NUT_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Sidonia",
@@ -690,7 +690,7 @@
     "email": "snorthbridge24@go.com",
     "status": "PENDING",
     "relation": "PARENT",
-    "dietary": "NUT_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Saunders",
@@ -708,7 +708,7 @@
     "email": "jnotton26@mit.edu",
     "status": "PENDING",
     "relation": "CHILD",
-    "dietary": "SHELLFISH_FREE"
+    "dietary": "NONE"
   },
   {
     "firstName": "Hashim",
@@ -717,6 +717,6 @@
     "email": "hdimock27@jigsy.com",
     "status": "ACTIVE",
     "relation": "SIBLING",
-    "dietary": "OTHER"
+    "dietary": "NONE"
   }
 ]

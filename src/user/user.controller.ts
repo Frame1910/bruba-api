@@ -28,9 +28,10 @@ export class UserController {
       lastName: string;
       mobile?: string | null;
       email?: string | null;
-      status: string;
-      relation: string;
+      // status: string;
+      // relation: string;
       dietary?: string[];
+      allergies?: string;
     },
   ) {
     const user = {
@@ -39,11 +40,12 @@ export class UserController {
       lastName: user_body.lastName,
       mobile: user_body.mobile,
       email: user_body.email,
-      status: user_body.status as Status,
-      relation: user_body.relation as RelationType,
+      // status: user_body.status as Status,
+      // relation: user_body.relation as RelationType,
       dietary: user_body.dietary.map(
         (dietary) => dietary as DietaryRestriction,
       ),
+      allergies: user_body.allergies,
     };
     return this.userService.createUser(user);
   }

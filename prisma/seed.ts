@@ -12,9 +12,10 @@ const userData = rawUserData.map((user): Prisma.UserCreateManyInput => {
     lastName: user.lastName,
     mobile: user.mobile,
     email: user.email,
-    status: user.status,
-    relation: user.relation,
+    // status: user.status,
+    // relation: user.relation,
     dietary: [user.dietary],
+    allergies: user.allergies,
   };
 });
 

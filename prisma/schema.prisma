@@ -14,9 +14,10 @@ model User {
   lastName   String
   mobile     String?
   email      String?              @unique
-  status     Status
-  relation   RelationType
+  // status     Status
+  // relation   RelationType
   dietary    DietaryRestriction[]
+  allergies  String?
   createdAt  DateTime             @default(now())
   updatedAt  DateTime             @updatedAt
   UserInvite UserInvite[]
@@ -74,10 +75,10 @@ enum RelationType {
 enum DietaryRestriction {
   VEGETARIAN
   VEGAN
+  PESCATARIAN
   GLUTEN_FREE
   DAIRY_FREE
-  NUT_FREE
-  SHELLFISH_FREE
-  OTHER
+  KOSHER
+  HALAL
   NONE
 }
