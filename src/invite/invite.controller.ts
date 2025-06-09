@@ -61,6 +61,17 @@ export class InviteController {
     return this.userInviteService.updateManyUserSportsCarnival(body, code);
   }
 
+  @Patch(':code/update-invite')
+  async updateInvite(
+    @Param('code') code: string,
+    @Body() body: Prisma.InviteUpdateInput,
+  ) {
+    return this.inviteService.updateInvite({
+      where: { code: code },
+      data: body
+    });
+  }
+
   @Delete(':code')
   async deleteInvite(@Param('code') code: string) {
     return this.inviteService.deleteInvite({ code: code });
