@@ -29,6 +29,8 @@ model Invite {
   code           String       @id @unique
   allowPlusOne   Boolean
   sportsCarnival Boolean      @default(false)
+  bustransport   InviteStatus @default(PENDING)
+  address        String?
   firstSeenAt    DateTime?
   lastSeenAt     DateTime?
   createdAt      DateTime     @default(now())
