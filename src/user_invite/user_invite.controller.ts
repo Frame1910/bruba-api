@@ -14,6 +14,26 @@ import { Prisma } from '@prisma/client';
 export class UserInviteController {
   constructor(private readonly userInviteService: UserInviteService) {}
 
+  @Get(':inviteCode/status')
+  async getUserInvite(
+    @Param('inviteCode') inviteCode: string,
+  ) {
+    const userInvite = await this.userInviteService.userInvites({
+      where: {
+        inviteCode: inviteCode,
+      },
+    });
+
+    if (userInvite.length === 0) {
+      throw new HttpException('User invite not found', HttpStatus.NOT_FOUND);
+    }
+    return {
+      users: userInvite.map(invite => ({
+        status: invite.status,
+      })),
+    };
+  }
+
   @Post(':inviteCode')
   async addUsersToInvite(
     @Param('inviteCode') inviteCode: string,
