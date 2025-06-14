@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { UserInvite, Prisma, $Enums } from '@prisma/client';
+import { UserInvite, Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -66,7 +66,7 @@ export class UserInviteService {
             inviteCode: inviteCode, // Assuming all statuses have the same inviteCode
           },
         },
-        data: { status: $Enums.InviteStatus[status] },
+        data: { status: status },
       });
     });
     return await Promise.all(updatePromises);
@@ -84,7 +84,7 @@ export class UserInviteService {
             inviteCode: inviteCode, // Assuming all statuses have the same inviteCode
           },
         },
-        data: { scstatus: $Enums.InviteStatus[scstatus] },
+        data: { scstatus: scstatus },
       });
     });
     return await Promise.all(updatePromises);

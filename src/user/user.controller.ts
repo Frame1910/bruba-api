@@ -8,12 +8,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import {
-  Prisma,
-  RelationType,
-  Status,
-  DietaryRestriction,
-} from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 @Controller('users')
 export class UserController {
@@ -42,9 +37,7 @@ export class UserController {
       email: user_body.email,
       // status: user_body.status as Status,
       // relation: user_body.relation as RelationType,
-      dietary: user_body.dietary.map(
-        (dietary) => dietary as DietaryRestriction,
-      ),
+      dietary: user_body.dietary ? user_body.dietary.join(',') : undefined,
       allergies: user_body.allergies,
     };
     return this.userService.createUser(user);
