@@ -4,32 +4,30 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlserver"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id         String               @id @unique @default(uuid())
+  id         String       @id @default(uuid())
   firstName  String
   lastName   String
   mobile     String?
   email      String?
-  // status     Status
-  // relation   RelationType
-  dietary    DietaryRestriction[]
+  dietary    String?
   allergies  String?
-  createdAt  DateTime             @default(now())
-  updatedAt  DateTime             @updatedAt
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
   UserInvite UserInvite[]
 
   @@map("users")
 }
 
 model Invite {
-  code           String       @id @unique
+  code           String       @id
   allowPlusOne   Boolean
   sportsCarnival Boolean      @default(false)
-  bustransport   InviteStatus @default(PENDING)
+  bustransport   String       @default("PENDING")
   address        String?
   firstSeenAt    DateTime?
   lastSeenAt     DateTime?
@@ -42,46 +40,15 @@ model Invite {
 
 model UserInvite {
   userId     String
-  user       User         @relation(fields: [userId], references: [id])
-  invite     Invite       @relation(fields: [inviteCode], references: [code])
+  user       User     @relation(fields: [userId], references: [id])
+  invite     Invite   @relation(fields: [inviteCode], references: [code])
   inviteCode String
-  status     InviteStatus @default(PENDING)
-  scstatus   InviteStatus @default(PENDING)
+  status     String   @default("PENDING")
+  scstatus   String   @default("PENDING")
   isPlusOne  Boolean
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   @@id([userId, inviteCode])
   @@map("user_invites")
-}
-
-enum Status {
-  ACTIVE
-  INACTIVE
-  PENDING
-}
-
-enum InviteStatus {
-  ACCEPTED
-  DECLINED
-  PENDING
-}
-
-enum RelationType {
-  PARENT
-  CHILD
-  SIBLING
-  SPOUSE
-  FRIEND
-}
-
-enum DietaryRestriction {
-  VEGETARIAN
-  VEGAN
-  PESCATARIAN
-  GLUTEN_FREE
-  DAIRY_FREE
-  KOSHER
-  HALAL
-  NONE
 }

@@ -12,20 +12,19 @@ const userData = rawUserData.map((user): Prisma.UserCreateManyInput => {
     lastName: user.lastName,
     mobile: user.mobile,
     email: user.email,
-    // status: user.status,
-    // relation: user.relation,
-    dietary: [user.dietary],
+    dietary: user.dietary,
     allergies: user.allergies,
   };
 });
 
 async function main() {
   // Creating users
-  const users = await prisma.user.createManyAndReturn({
+  await prisma.user.createMany({
     data: userData,
   });
+  const users = await prisma.user.findMany();
 
-  const invites = await prisma.invite.createManyAndReturn({
+  const invites = await prisma.invite.createMany({
     data: [
       {
         code: '000000',
@@ -56,7 +55,7 @@ async function main() {
       userId: users[0].id,
       inviteCode: '000000',
       isPlusOne: false,
-    }
+    },
   ];
 
   const couple = [
