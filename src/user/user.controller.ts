@@ -25,7 +25,7 @@ export class UserController {
       email?: string | null;
       // status: string;
       // relation: string;
-      dietary?: string[];
+      dietary?: string;
       allergies?: string;
     },
   ) {
@@ -37,7 +37,7 @@ export class UserController {
       email: user_body.email,
       // status: user_body.status as Status,
       // relation: user_body.relation as RelationType,
-      dietary: user_body.dietary ? user_body.dietary.join(',') : undefined,
+      dietary: user_body.dietary,
       allergies: user_body.allergies,
     };
     return this.userService.createUser(user);
