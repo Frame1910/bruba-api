@@ -1,99 +1,254 @@
 import { Prisma, PrismaClient } from '@prisma/client';
-import * as fs from 'fs';
 const prisma = new PrismaClient();
 
-const rawUserData: any[] = JSON.parse(
-  fs.readFileSync('prisma/MOCK_USER_DATA.json', 'utf-8'),
-);
+// User data from SQL insert statements
+const userData: Prisma.UserCreateManyInput[] = [
+  { id: '7470572d-5dfe-4599-88d9-301466dd51af', firstName: 'Sharon', lastName: 'Marks' },
+  { id: 'cd7b75ed-a01d-4903-b731-fc65756c18c2', firstName: 'Charlie', lastName: 'Marks' },
+  { id: 'ac9b1fa1-be99-478c-ae32-9eec2ba53119', firstName: 'Daniel', lastName: 'Antoniewicz' },
+  { id: 'b5062e0d-e7d9-4e58-bf5b-7a0472ac2b92', firstName: 'Joanna', lastName: 'Antoniewicz' },
+  { id: '6cbe950f-1802-4a54-b76c-96fb150668af', firstName: 'Julia', lastName: 'Antoniewicz' },
+  { id: '1075241d-9af6-4761-a703-e9caa935ba96', firstName: 'Kacper', lastName: 'Antoniewicz' },
+  { id: '2790c330-0de4-428c-8a2a-31915bc49fa6', firstName: 'Shayla', lastName: 'Antoniewicz' },
+  { id: '60e34c12-6eb9-4062-b5f5-ea0233164261', firstName: 'James', lastName: 'Marks' },
+  { id: 'e6c1e10f-f1c3-43b1-bc6f-038e365ea7d0', firstName: 'Larissa', lastName: 'Jane' },
+  { id: '80eccbc5-b4fb-4d16-922e-c2048a51fbe9', firstName: 'James', lastName: 'Turner' },
+  { id: 'd6fa998d-a498-4bdd-94b5-bf67e0b27da8', firstName: 'Tanieka', lastName: 'Paskov' },
+  { id: '84bba8b9-d840-4c88-96fb-99b095c76937', firstName: 'Anysha', lastName: 'Grossman' },
+  { id: '7223a7bb-9a5b-4df6-a234-7f70bd58a4a1', firstName: 'Nathan', lastName: 'Morris' },
+  { id: 'eaec4f41-3a54-4c8c-bd90-e18ee52fd7c5', firstName: 'Walt', lastName: 'Marks' },
+  { id: '6908e9e6-6a7d-41ea-8b8b-8df8243ae37b', firstName: 'Joshua', lastName: 'Dwyer' },
+  { id: '685b9c7b-486b-45b8-9f6c-3fb4de02985b', firstName: 'Milly', lastName: 'Dwyer' },
+  { id: '2e6e0666-3597-4111-b17f-906ee173b94c', firstName: 'Zaccie', lastName: 'Adams' },
+  { id: 'e26427f8-7462-47b7-b84e-c671cec1b1cf', firstName: 'Angel', lastName: 'Guan' },
+  { id: '1ef82283-69fd-4b8c-af39-47fcc0447523', firstName: 'Bree', lastName: 'Williams' },
+  { id: 'c83a3428-c81a-41a2-84b6-aa816ceba7a8', firstName: 'Jake', lastName: 'Vincent' },
+  { id: '1c2b3406-c47a-4232-b833-6e235b0fa1db', firstName: 'Georgia', lastName: 'May-Dunlop' },
+  { id: 'ae484c21-7a80-4e5f-a1ae-c8f89693eb66', firstName: 'Natasha', lastName: 'Bolfing' },
+  { id: '250e7087-2017-4882-b682-263bacf44881', firstName: 'Mitchell', lastName: 'Studdert' },
+  { id: '700a76bf-5b6f-4299-b869-6988ddddb663', firstName: 'Nick', lastName: 'Luong' },
+  { id: 'db7193bc-01a6-4411-bd53-4d57e8029fa5', firstName: 'Ted', lastName: 'Bassett' },
+  { id: 'fc81712a-a441-4372-a516-07852c7c5186', firstName: 'Adam', lastName: 'Goehler' },
+  { id: '48e8ea8a-bba8-4c7d-9a81-f21f14ab7bea', firstName: 'Deegan', lastName: 'Webb' },
+  { id: '59460e54-fe11-4550-a000-33bf1d3e5f14', firstName: 'Nick', lastName: 'Goss' },
+  { id: '62c58c3c-b8b9-48ad-a4c9-e70a8b2365f5', firstName: 'Jayden', lastName: 'Brown' },
+  { id: '78e25bf8-4b72-4746-b797-9bc3378d2ffb', firstName: 'Anabelle', lastName: 'Sassenfeld' },
+  { id: '63fa8a50-7ccf-40ac-ae52-ea8c551c2a2c', firstName: 'Darren', lastName: 'Meiring' },
+  { id: '6ccada5d-2676-45dd-be91-25fa00cdfe46', firstName: 'Kara', lastName: 'Shortland' },
+  { id: 'b5cacc73-5ae2-46a7-81f2-970fefafefb0', firstName: 'Michael', lastName: 'Albanese' },
+  { id: '2608d2f7-f1d7-4f93-a2c6-df42f25c4747', firstName: 'Luke', lastName: 'Melville' },
+  { id: '516bb5f2-8863-48af-afb0-6ded8b3105cd', firstName: 'Adil', lastName: 'Raza Zaidi' },
+  { id: 'b9dfb259-9f2f-41ea-b812-6e11089ad382', firstName: 'Sijay', lastName: 'Parhanah' },
+  { id: '96f50329-ece4-485a-b5b7-f9c737987fc5', firstName: 'Patryk', lastName: 'Malinowski' },
+  { id: 'b4aa88dc-791c-4184-be19-601596033ded', firstName: 'Tashi', lastName: 'Deki' },
+  { id: 'f9491044-8929-4a27-8aa8-3bd4ea4695d1', firstName: 'Nathan', lastName: 'Cusack' },
+  { id: 'e66e5134-7c84-4e27-83a1-87d3091b98f6', firstName: 'Caoimhe', lastName: 'Hennigan' },
+  { id: '3e2d8fbe-28e8-49ec-bd10-1f5fb8a97f18', firstName: 'Nia', lastName: 'Lasam' },
+  { id: '3c74647f-fc15-44d7-bbfd-21f30be30157', firstName: 'Jack', lastName: 'White' },
+  { id: '217ebbec-f995-4b6b-a0b6-81aee956bce9', firstName: 'Baydon', lastName: 'Sharman' },
+  { id: '2720d62a-a1d6-4cee-b66b-6c4d8402b628', firstName: 'Kaytee', lastName: 'Stewart' },
+  { id: 'fa730531-d6cc-40a2-9d39-33161bbf86aa', firstName: 'Rob', lastName: 'Stewart' },
+  { id: '2a636f1f-385c-4517-b47d-14cb05d6ef4c', firstName: 'Jacqui', lastName: 'Stewart' },
+  { id: '06b50d03-d786-4476-8fdf-f89424ebdf32', firstName: 'Ash', lastName: 'Michael' },
+  { id: '44237c28-60d4-4bc0-a480-6d2599d36b7c', firstName: 'Brenton', lastName: 'Anderson' },
+  { id: 'bd46dba7-bf91-44d6-8268-162fc781e977', firstName: 'Chloe', lastName: 'Anderson' },
+  { id: 'c4e5002f-6aee-4024-9aeb-ebf14062d87d', firstName: 'Gavin', lastName: 'Williams' },
+  { id: '8d61adc7-83e9-4983-a896-3b91887ff28d', firstName: 'Shayla', lastName: 'Seitz' },
+  { id: '7a3d81a2-1d97-4628-96d7-3e5e86236d1b', firstName: 'Justyna', lastName: 'Czujko' },
+  { id: '06e64059-129d-4e8e-966c-9f98137af001', firstName: 'Tomasz', lastName: 'Czujko' },
+  { id: '8c0c18e2-5cf7-45fd-a476-d113a6110157', firstName: 'Andrew', lastName: 'Mockford' },
+  { id: 'a1c18a7d-a310-477e-bf50-3e17df743818', firstName: 'Naomi', lastName: 'Mockford' },
+  { id: '587ff9a1-f23a-4d0f-b4ff-5ca122745578', firstName: 'Garrick', lastName: 'Morrison' },
+  { id: 'ca5b3e36-f793-4bca-acdb-e814cdf76b69', firstName: 'Val', lastName: 'Mercedes' },
+  { id: '00205b50-4e9f-4f96-a982-056de2f5eef9', firstName: 'Emily', lastName: 'Jane Clark' },
+  { id: '5c834988-54ee-4948-9206-b0e5b464b21d', firstName: 'Leia', lastName: 'Clark' },
+  { id: '3a034b94-6320-4be9-8a39-5ec2d3312ca3', firstName: 'Oliver', lastName: 'Thompson' },
+  { id: '465a5b12-68a8-4543-a0d9-8e3f1d1c18b6', firstName: 'Cal', lastName: 'Maitland-Longhurst' },
+  { id: '5974351e-5b95-4393-aead-b098d5acba1d', firstName: 'Brennan', lastName: 'Maitland-Longhurst' },
+  { id: '0ec8fc0a-8cda-47e3-acf4-5f838d317d64', firstName: 'John', lastName: 'Nguyen' },
+  { id: '5945c3e2-d6de-450e-9f12-45dbe4aa6fd4', firstName: 'Thierry', lastName: 'Chabanne' },
+  { id: 'c1c8a090-7f9d-4f4f-bbf3-8acf7dbb671e', firstName: 'Birgit', lastName: 'Cropp' },
+  { id: '6d3247e2-f715-40d4-8036-d1de5897c10e', firstName: 'Arvin', lastName: 'Seiler' },
+  { id: 'a394adb4-6861-48ac-985c-922a6e05d2ea', firstName: 'Lilian', lastName: 'Vernon' },
+  { id: 'aaa536a9-3802-4fb2-ad43-1a6594dd5f1a', firstName: 'Niamh', lastName: 'Michelle' },
+  { id: '770a518a-f441-4f9c-9c10-42cc4b37736a', firstName: 'Jayden', lastName: 'Slater' },
+  { id: '9208d4db-86c4-48cb-9985-d5eaa68ef8e8', firstName: 'Michael', lastName: 'Antoniewicz' },
+  { id: '9b2cd57c-279b-4235-acae-37cbe463662e', firstName: 'Maria', lastName: 'Antoniewicz' },
+  { id: '482e8a0f-b12a-4181-905a-c39a146d2d25', firstName: 'Dorota', lastName: 'Milewicz' },
+  { id: '28d81e06-006c-44eb-9394-2dd8e4f1f36e', firstName: 'Lukasz', lastName: 'Ledwolk' },
+  { id: '09b1e267-c855-4f94-9090-cdc79be19159', firstName: 'Krzysztof', lastName: 'Antoniewicz' },
+  { id: '94c3c298-29bb-4d77-97f5-4332837f8a78', firstName: 'Shannon', lastName: 'Fitzpatrick' },
+  { id: 'ca3e1f2b-8326-4476-9bb7-68d7c6c8b1e3', firstName: 'Shazna', lastName: 'Naleem' },
+  { id: '642e2b72-f67f-473c-8774-d8cb89d8505a', firstName: 'Jaron', lastName: 'Coombs' },
+  { id: 'b3e9199b-a6dd-40d3-b304-def28ae0c1d1', firstName: 'Josh', lastName: 'Paige' },
+  { id: '5c9651ed-4f79-4a3e-8949-f9508c7deecd', firstName: 'Matthew', lastName: 'Franchi' },
+  { id: '34cd1f89-fbc9-4b1b-a9d7-ca10dff5ceef', firstName: 'Joe', lastName: 'Hooper' },
+  { id: 'e86bfa68-c941-4ff7-9e63-9aa4370c3f16', firstName: 'Sophie', lastName: 'Sun' },
+];
 
-const userData = rawUserData.map((user): Prisma.UserCreateManyInput => {
-  return {
-    firstName: user.firstName,
-    lastName: user.lastName,
-    mobile: user.mobile,
-    email: user.email,
-    dietary: user.dietary,
-    allergies: user.allergies,
-  };
-});
+// Invite data from SQL insert statements
+const inviteData: Prisma.InviteCreateManyInput[] = [
+  { code: '717477', allowPlusOne: false, sportsCarnival: true },
+  { code: '894131', allowPlusOne: false, sportsCarnival: true },
+  { code: '505004', allowPlusOne: false, sportsCarnival: true },
+  { code: '461467', allowPlusOne: false, sportsCarnival: true },
+  { code: '627841', allowPlusOne: false, sportsCarnival: false },
+  { code: '245554', allowPlusOne: false, sportsCarnival: true },
+  { code: '753115', allowPlusOne: false, sportsCarnival: true },
+  { code: '286435', allowPlusOne: false, sportsCarnival: false },
+  { code: '373403', allowPlusOne: false, sportsCarnival: true },
+  { code: '762047', allowPlusOne: false, sportsCarnival: true },
+  { code: '172449', allowPlusOne: false, sportsCarnival: true },
+  { code: '309789', allowPlusOne: false, sportsCarnival: true },
+  { code: '538595', allowPlusOne: false, sportsCarnival: true },
+  { code: '618679', allowPlusOne: false, sportsCarnival: true },
+  { code: '759617', allowPlusOne: false, sportsCarnival: true },
+  { code: '936104', allowPlusOne: true, sportsCarnival: true },
+  { code: '840870', allowPlusOne: false, sportsCarnival: true },
+  { code: '838967', allowPlusOne: true, sportsCarnival: true },
+  { code: '473811', allowPlusOne: false, sportsCarnival: true },
+  { code: '134556', allowPlusOne: false, sportsCarnival: true },
+  { code: '998733', allowPlusOne: true, sportsCarnival: true },
+  { code: '934850', allowPlusOne: false, sportsCarnival: true },
+  { code: '115810', allowPlusOne: false, sportsCarnival: true },
+  { code: '554135', allowPlusOne: false, sportsCarnival: true },
+  { code: '763836', allowPlusOne: false, sportsCarnival: true },
+  { code: '550886', allowPlusOne: false, sportsCarnival: true },
+  { code: '872089', allowPlusOne: false, sportsCarnival: true },
+  { code: '493669', allowPlusOne: false, sportsCarnival: true },
+  { code: '623487', allowPlusOne: false, sportsCarnival: false },
+  { code: '583715', allowPlusOne: false, sportsCarnival: true },
+  { code: '349540', allowPlusOne: false, sportsCarnival: true },
+  { code: '757292', allowPlusOne: false, sportsCarnival: true },
+  { code: '606559', allowPlusOne: false, sportsCarnival: false },
+  { code: '848702', allowPlusOne: false, sportsCarnival: false },
+  { code: '857753', allowPlusOne: false, sportsCarnival: false },
+  { code: '755185', allowPlusOne: true, sportsCarnival: true },
+  { code: '281505', allowPlusOne: false, sportsCarnival: true },
+  { code: '485165', allowPlusOne: false, sportsCarnival: true },
+  { code: '986568', allowPlusOne: false, sportsCarnival: false },
+  { code: '829789', allowPlusOne: true, sportsCarnival: false },
+  { code: '975732', allowPlusOne: false, sportsCarnival: false },
+  { code: '778468', allowPlusOne: false, sportsCarnival: true },
+  { code: '409464', allowPlusOne: true, sportsCarnival: false },
+  { code: '716970', allowPlusOne: false, sportsCarnival: false },
+  { code: '178469', allowPlusOne: false, sportsCarnival: false },
+  { code: '747865', allowPlusOne: false, sportsCarnival: false },
+  { code: '575022', allowPlusOne: false, sportsCarnival: true },
+  { code: '977171', allowPlusOne: false, sportsCarnival: true },
+  { code: '695711', allowPlusOne: false, sportsCarnival: true },
+  { code: '615598', allowPlusOne: false, sportsCarnival: true },
+  { code: '844642', allowPlusOne: true, sportsCarnival: false },
+  { code: '386828', allowPlusOne: false, sportsCarnival: true },
+  { code: '125840', allowPlusOne: false, sportsCarnival: true },
+  { code: '792634', allowPlusOne: true, sportsCarnival: false },
+];
+
+// UserInvite data from SQL insert statements
+const userInviteData: Prisma.UserInviteCreateManyInput[] = [
+  { userId: '7470572d-5dfe-4599-88d9-301466dd51af', inviteCode: '717477', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'cd7b75ed-a01d-4903-b731-fc65756c18c2', inviteCode: '717477', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'ac9b1fa1-be99-478c-ae32-9eec2ba53119', inviteCode: '894131', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'b5062e0d-e7d9-4e58-bf5b-7a0472ac2b92', inviteCode: '894131', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '6cbe950f-1802-4a54-b76c-96fb150668af', inviteCode: '505004', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '1075241d-9af6-4761-a703-e9caa935ba96', inviteCode: '461467', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '2790c330-0de4-428c-8a2a-31915bc49fa6', inviteCode: '461467', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '60e34c12-6eb9-4062-b5f5-ea0233164261', inviteCode: '627841', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'e6c1e10f-f1c3-43b1-bc6f-038e365ea7d0', inviteCode: '627841', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '80eccbc5-b4fb-4d16-922e-c2048a51fbe9', inviteCode: '245554', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'd6fa998d-a498-4bdd-94b5-bf67e0b27da8', inviteCode: '245554', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '84bba8b9-d840-4c88-96fb-99b095c76937', inviteCode: '753115', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '7223a7bb-9a5b-4df6-a234-7f70bd58a4a1', inviteCode: '753115', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'eaec4f41-3a54-4c8c-bd90-e18ee52fd7c5', inviteCode: '286435', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '6908e9e6-6a7d-41ea-8b8b-8df8243ae37b', inviteCode: '373403', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '685b9c7b-486b-45b8-9f6c-3fb4de02985b', inviteCode: '373403', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '2e6e0666-3597-4111-b17f-906ee173b94c', inviteCode: '762047', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'e26427f8-7462-47b7-b84e-c671cec1b1cf', inviteCode: '762047', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '1ef82283-69fd-4b8c-af39-47fcc0447523', inviteCode: '172449', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'c83a3428-c81a-41a2-84b6-aa816ceba7a8', inviteCode: '172449', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '1c2b3406-c47a-4232-b833-6e235b0fa1db', inviteCode: '309789', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'ae484c21-7a80-4e5f-a1ae-c8f89693eb66', inviteCode: '538595', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '250e7087-2017-4882-b682-263bacf44881', inviteCode: '538595', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '700a76bf-5b6f-4299-b869-6988ddddb663', inviteCode: '618679', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'db7193bc-01a6-4411-bd53-4d57e8029fa5', inviteCode: '759617', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'fc81712a-a441-4372-a516-07852c7c5186', inviteCode: '936104', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '48e8ea8a-bba8-4c7d-9a81-f21f14ab7bea', inviteCode: '840870', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '59460e54-fe11-4550-a000-33bf1d3e5f14', inviteCode: '838967', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '62c58c3c-b8b9-48ad-a4c9-e70a8b2365f5', inviteCode: '473811', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '78e25bf8-4b72-4746-b797-9bc3378d2ffb', inviteCode: '473811', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '63fa8a50-7ccf-40ac-ae52-ea8c551c2a2c', inviteCode: '134556', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '6ccada5d-2676-45dd-be91-25fa00cdfe46', inviteCode: '134556', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'b5cacc73-5ae2-46a7-81f2-970fefafefb0', inviteCode: '998733', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '2608d2f7-f1d7-4f93-a2c6-df42f25c4747', inviteCode: '934850', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '516bb5f2-8863-48af-afb0-6ded8b3105cd', inviteCode: '115810', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'b9dfb259-9f2f-41ea-b812-6e11089ad382', inviteCode: '125840', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '96f50329-ece4-485a-b5b7-f9c737987fc5', inviteCode: '554135', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'b4aa88dc-791c-4184-be19-601596033ded', inviteCode: '554135', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'f9491044-8929-4a27-8aa8-3bd4ea4695d1', inviteCode: '763836', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'e66e5134-7c84-4e27-83a1-87d3091b98f6', inviteCode: '763836', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '3e2d8fbe-28e8-49ec-bd10-1f5fb8a97f18', inviteCode: '550886', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '3c74647f-fc15-44d7-bbfd-21f30be30157', inviteCode: '550886', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '217ebbec-f995-4b6b-a0b6-81aee956bce9', inviteCode: '872089', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '2720d62a-a1d6-4cee-b66b-6c4d8402b628', inviteCode: '493669', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'fa730531-d6cc-40a2-9d39-33161bbf86aa', inviteCode: '623487', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '2a636f1f-385c-4517-b47d-14cb05d6ef4c', inviteCode: '623487', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '06b50d03-d786-4476-8fdf-f89424ebdf32', inviteCode: '583715', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '44237c28-60d4-4bc0-a480-6d2599d36b7c', inviteCode: '349540', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'bd46dba7-bf91-44d6-8268-162fc781e977', inviteCode: '349540', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'c4e5002f-6aee-4024-9aeb-ebf14062d87d', inviteCode: '757292', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '8d61adc7-83e9-4983-a896-3b91887ff28d', inviteCode: '757292', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '7a3d81a2-1d97-4628-96d7-3e5e86236d1b', inviteCode: '606559', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '06e64059-129d-4e8e-966c-9f98137af001', inviteCode: '606559', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '8c0c18e2-5cf7-45fd-a476-d113a6110157', inviteCode: '848702', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'a1c18a7d-a310-477e-bf50-3e17df743818', inviteCode: '848702', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '587ff9a1-f23a-4d0f-b4ff-5ca122745578', inviteCode: '857753', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'ca5b3e36-f793-4bca-acdb-e814cdf76b69', inviteCode: '755185', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '00205b50-4e9f-4f96-a982-056de2f5eef9', inviteCode: '281505', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '5c834988-54ee-4948-9206-b0e5b464b21d', inviteCode: '281505', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '3a034b94-6320-4be9-8a39-5ec2d3312ca3', inviteCode: '485165', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '465a5b12-68a8-4543-a0d9-8e3f1d1c18b6', inviteCode: '986568', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '5974351e-5b95-4393-aead-b098d5acba1d', inviteCode: '986568', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '0ec8fc0a-8cda-47e3-acf4-5f838d317d64', inviteCode: '829789', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '5945c3e2-d6de-450e-9f12-45dbe4aa6fd4', inviteCode: '975732', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'c1c8a090-7f9d-4f4f-bbf3-8acf7dbb671e', inviteCode: '975732', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '6d3247e2-f715-40d4-8036-d1de5897c10e', inviteCode: '778468', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'a394adb4-6861-48ac-985c-922a6e05d2ea', inviteCode: '409464', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'aaa536a9-3802-4fb2-ad43-1a6594dd5f1a', inviteCode: '716970', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '770a518a-f441-4f9c-9c10-42cc4b37736a', inviteCode: '716970', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '9208d4db-86c4-48cb-9985-d5eaa68ef8e8', inviteCode: '178469', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '9b2cd57c-279b-4235-acae-37cbe463662e', inviteCode: '178469', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '482e8a0f-b12a-4181-905a-c39a146d2d25', inviteCode: '575022', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '28d81e06-006c-44eb-9394-2dd8e4f1f36e', inviteCode: '575022', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '09b1e267-c855-4f94-9090-cdc79be19159', inviteCode: '747865', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '94c3c298-29bb-4d77-97f5-4332837f8a78', inviteCode: '977171', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'ca3e1f2b-8326-4476-9bb7-68d7c6c8b1e3', inviteCode: '977171', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '642e2b72-f67f-473c-8774-d8cb89d8505a', inviteCode: '695711', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'b3e9199b-a6dd-40d3-b304-def28ae0c1d1', inviteCode: '615598', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '5c9651ed-4f79-4a3e-8949-f9508c7deecd', inviteCode: '844642', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '34cd1f89-fbc9-4b1b-a9d7-ca10dff5ceef', inviteCode: '386828', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: 'e86bfa68-c941-4ff7-9e63-9aa4370c3f16', inviteCode: '792634', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+];
 
 async function main() {
-  // Creating users
+  console.log('Seeding users...');
   await prisma.user.createMany({
     data: userData,
-  });
-  const users = await prisma.user.findMany();
-
-  const invites = await prisma.invite.createMany({
-    data: [
-      {
-        code: '000000',
-        allowPlusOne: true,
-        firstSeenAt: '2025-04-26T15:39:44Z',
-        lastSeenAt: '2025-07-26T23:08:58Z',
-        sportsCarnival: false,
-      },
-      {
-        code: '111111',
-        allowPlusOne: false,
-        firstSeenAt: '2025-05-20T10:39:31Z',
-        lastSeenAt: '2025-03-17T23:56:56Z',
-        sportsCarnival: true,
-      },
-      {
-        code: '696969',
-        allowPlusOne: false,
-        firstSeenAt: '2025-09-10T18:56:38Z',
-        lastSeenAt: '2025-02-28T06:30:39Z',
-        sportsCarnival: true,
-      },
-    ],
+    // skipDuplicates: true,
   });
 
-  const singlePlusOne = [
-    {
-      userId: users[0].id,
-      inviteCode: '000000',
-      isPlusOne: false,
-    },
-  ];
-
-  const couple = [
-    {
-      userId: users[5].id,
-      inviteCode: '111111',
-      isPlusOne: false,
-    },
-    {
-      userId: users[6].id,
-      inviteCode: '111111',
-      isPlusOne: false,
-    },
-  ];
-
-  const singleNoPlusOne = [
-    {
-      userId: users[4].id,
-      inviteCode: '696969',
-      isPlusOne: false,
-    },
-  ];
-
-  // const userInviteData = sampleInvites.map((invite) => {
-  //   return sampleUsers.map((user) => {
-  //     return {
-  //       userId: user.id,
-  //       inviteCode: invite.code,
-  //       isPlusOne: false,
-  //     };
-  //   });
-  // });
-
-  const combined_data = [...singlePlusOne, ...couple, ...singleNoPlusOne];
-
-  const userInvite = await prisma.userInvite.createMany({
-    data: combined_data,
+  console.log('Seeding invites...');
+  await prisma.invite.createMany({
+    data: inviteData,
+    // skipDuplicates: true,
   });
+
+  console.log('Seeding user invites...');
+  await prisma.userInvite.createMany({
+    data: userInviteData,
+    // skipDuplicates: true,
+  });
+
+  console.log('Seeding completed successfully!');
 }
 
 main()
