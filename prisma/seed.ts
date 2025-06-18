@@ -144,7 +144,7 @@ const inviteData: Prisma.InviteCreateManyInput[] = [
   { code: '386828', allowPlusOne: false, sportsCarnival: true },
   { code: '125840', allowPlusOne: false, sportsCarnival: true },
   { code: '792634', allowPlusOne: true, sportsCarnival: false },
-  { code: '000000', allowPlusOne: true, sportsCarnival: true },
+  { code: '000000', allowPlusOne: false, sportsCarnival: true },
 
 ];
 
