@@ -84,6 +84,8 @@ const userData: Prisma.UserCreateManyInput[] = [
   { id: '5c9651ed-4f79-4a3e-8949-f9508c7deecd', firstName: 'Matthew', lastName: 'Franchi' },
   { id: '34cd1f89-fbc9-4b1b-a9d7-ca10dff5ceef', firstName: 'Joe', lastName: 'Hooper' },
   { id: 'e86bfa68-c941-4ff7-9e63-9aa4370c3f16', firstName: 'Sophie', lastName: 'Sun' },
+  { id: '111aa111-aaaa-1a1a-11aa-1aa1111a1a11', firstName: 'John', lastName: 'Doe' },
+  { id: '111aa111-aaaa-1a1a-aa11-1aa1111a1a11', firstName: 'Jane', lastName: 'Doe' },
 ];
 
 // Invite data from SQL insert statements
@@ -142,6 +144,8 @@ const inviteData: Prisma.InviteCreateManyInput[] = [
   { code: '386828', allowPlusOne: false, sportsCarnival: true },
   { code: '125840', allowPlusOne: false, sportsCarnival: true },
   { code: '792634', allowPlusOne: true, sportsCarnival: false },
+  { code: '000000', allowPlusOne: true, sportsCarnival: true },
+
 ];
 
 // UserInvite data from SQL insert statements
@@ -227,6 +231,8 @@ const userInviteData: Prisma.UserInviteCreateManyInput[] = [
   { userId: '5c9651ed-4f79-4a3e-8949-f9508c7deecd', inviteCode: '844642', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
   { userId: '34cd1f89-fbc9-4b1b-a9d7-ca10dff5ceef', inviteCode: '386828', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
   { userId: 'e86bfa68-c941-4ff7-9e63-9aa4370c3f16', inviteCode: '792634', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '111aa111-aaaa-1a1a-11aa-1aa1111a1a11', inviteCode: '000000', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '111aa111-aaaa-1a1a-aa11-1aa1111a1a11', inviteCode: '000000', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
 ];
 
 async function main() {
