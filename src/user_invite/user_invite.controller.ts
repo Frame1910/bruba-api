@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
@@ -92,6 +93,28 @@ export class UserInviteController {
       where: {
         inviteCode: inviteCode,
       },
+    });
+  }
+
+  @Delete(':inviteCode/:userId')
+  async deleteUserInvite(@Param('inviteCode') inviteCode: string, @Param('userId') userId: string) {
+    const userInvite = await this.userInviteService.userInvites({
+      where: {
+        inviteCode: inviteCode,
+        userId: userId,
+      },
+    });
+
+    if (userInvite.length === 0) {
+      throw new HttpException('User invite not found', HttpStatus.NOT_FOUND);
+    }
+
+    return this.userInviteService.deleteUserInvite({
+      userId: userId,
+      userId_inviteCode: {
+        userId: userId,
+        inviteCode: inviteCode,
+      }
     });
   }
 }
