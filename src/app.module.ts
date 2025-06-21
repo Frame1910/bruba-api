@@ -8,6 +8,8 @@ import { UserInviteService } from './user_invite/user_invite.service';
 import { UserController } from './user/user.controller';
 import { InviteController } from './invite/invite.controller';
 import { UserInviteController } from './user_invite/user_invite.controller';
+import { MetadataController } from './metadata/metadata.controller';
+import { MetadataService } from './metadata/metadata.service';
 
 @Module({
   imports: [],
@@ -16,6 +18,7 @@ import { UserInviteController } from './user_invite/user_invite.controller';
     UserController,
     InviteController,
     UserInviteController,
+    MetadataController,
   ],
   providers: [
     AppService,
@@ -23,6 +26,7 @@ import { UserInviteController } from './user_invite/user_invite.controller';
     UserService,
     InviteService,
     UserInviteService,
+    MetadataService
   ],
 })
 export class AppModule {}
