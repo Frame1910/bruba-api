@@ -34,6 +34,7 @@ model Invite {
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
   UserInvite     UserInvite[]
+  visits         Int         @default(0)
 
   @@map("invites")
 }
