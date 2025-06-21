@@ -235,6 +235,19 @@ const userInviteData: Prisma.UserInviteCreateManyInput[] = [
   { userId: '111aa111-aaaa-1a1a-aa11-1aa1111a1a11', inviteCode: '000000', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
 ];
 
+const metadata: Prisma.MetadataCreateManyInput[] = [
+  { event: 'weddingDate', datetime: '2024-11-22T16:00:00+08:00' },
+  { event: 'arriveByTime', datetime: '2025-11-22T15:30:00+08:00' },
+  { event: 'ceremonyStartTime', datetime: '2025-11-22T16:00:00+08:00' },
+  { event: 'receptionStartTime', datetime: '2025-11-22T17:00:00+08:00' },
+  { event: 'weddingEndTime', datetime: '2025-11-23T00:00:00+08:00' },
+  { event: 'sportsCarnivalStartTime', datetime: '2025-11-19T16:00:00+08:00' },
+  { event: 'sportsCarnivalEndTime', datetime: '2025-11-19T22:00:00+08:00' },
+  { event: 'weddingRSVPDue', datetime: '2025-09-30T00:00:00+08:00' },
+  { event: 'busTransportRSVPDue', datetime: '2025-10-31T00:00:00+08:00' },
+  { event: 'sportsCarnivalRSVPDue', datetime: '2025-11-14T00:00:00+08:00' },
+]
+
 async function main() {
   console.log('Seeding users...');
   await prisma.user.createMany({
@@ -252,6 +265,11 @@ async function main() {
   await prisma.userInvite.createMany({
     data: userInviteData,
     // skipDuplicates: true,
+  });
+
+  console.log('Seeding metadata table...');
+  await prisma.metadata.createMany({
+    data: metadata
   });
 
   console.log('Seeding completed successfully!');
