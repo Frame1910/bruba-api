@@ -6,18 +6,18 @@ import {
   HttpStatus,
   Param,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { UserInviteService } from './user_invite.service';
 import { Prisma } from '@prisma/client';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('user-invites')
 export class UserInviteController {
   constructor(private readonly userInviteService: UserInviteService) {}
 
   @Get(':inviteCode/status')
-  async getUserInvite(
-    @Param('inviteCode') inviteCode: string,
-  ) {
+  async getUserInvite(@Param('inviteCode') inviteCode: string) {
     const userInvite = await this.userInviteService.userInvites({
       where: {
         inviteCode: inviteCode,
@@ -28,7 +28,7 @@ export class UserInviteController {
       throw new HttpException('User invite not found', HttpStatus.NOT_FOUND);
     }
     return {
-      users: userInvite.map(invite => ({
+      users: userInvite.map((invite) => ({
         status: invite.status,
       })),
     };

@@ -8,10 +8,12 @@ import {
   Post,
   Query,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { InviteService } from './invite.service';
 import { Prisma } from '@prisma/client';
 import { UserInviteService } from '../user_invite/user_invite.service';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('invites')
 export class InviteController {
@@ -68,7 +70,7 @@ export class InviteController {
   ) {
     return this.inviteService.updateInvite({
       where: { code: code },
-      data: body
+      data: body,
     });
   }
 

@@ -11,13 +11,15 @@ import { UserInviteController } from './user_invite/user_invite.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './auth/auth.guard';
 
 @Module({
   imports: [
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '120s' },
     }),
   ],
   controllers: [
@@ -34,6 +36,10 @@ import { AuthService } from './auth/auth.service';
     UserService,
     InviteService,
     UserInviteService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
   ],
 })
 export class AppModule {}
