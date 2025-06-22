@@ -34,6 +34,7 @@ model Invite {
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
   UserInvite     UserInvite[]
+  visits         Int         @default(0)
 
   @@map("invites")
 }
@@ -51,4 +52,10 @@ model UserInvite {
 
   @@id([userId, inviteCode])
   @@map("user_invites")
+}
+
+model Metadata {
+  event       String   @id
+  datetime    DateTime @default(now())
+  @@map("metadata")
 }

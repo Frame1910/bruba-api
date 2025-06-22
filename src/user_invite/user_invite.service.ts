@@ -94,7 +94,7 @@ export class UserInviteService {
     where: Prisma.UserInviteWhereUniqueInput,
   ): Promise<UserInvite> {
     return this.prisma.userInvite.delete({
-      where,
+      where
     });
   }
 }

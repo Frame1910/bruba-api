@@ -13,6 +13,8 @@ import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/auth.guard';
+import { MetadataController } from './metadata/metadata.controller';
+import { MetadataService } from './metadata/metadata.service';
 
 @Module({
   imports: [
@@ -28,6 +30,7 @@ import { AuthGuard } from './auth/auth.guard';
     InviteController,
     UserInviteController,
     AuthController,
+    MetadataController,
   ],
   providers: [
     AppService,
@@ -40,6 +43,7 @@ import { AuthGuard } from './auth/auth.guard';
       provide: APP_GUARD,
       useClass: AuthGuard,
     },
+    MetadataService,
   ],
 })
 export class AppModule {}
