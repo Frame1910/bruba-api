@@ -6,10 +6,15 @@ import {
   Param,
   Patch,
   Post,
+  Query,
+  Res,
+  UseGuards,
 } from '@nestjs/common';
 import { InviteService } from './invite.service';
 import { Prisma } from '@prisma/client';
 import { UserInviteService } from '../user_invite/user_invite.service';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { Public } from 'src/auth/functions';
 
 @Controller('invites')
 export class InviteController {
@@ -43,15 +48,30 @@ export class InviteController {
     return invite;
   }
 
-  @Patch(':code')
-  async updateInvite(
-    @Body()
-    inviteBody: Prisma.InviteUpdateInput,
+  @Patch(':code/update-status')
+  async updateInviteStatus(
     @Param('code') code: string,
+    @Body() body: { userId; status: string }[],
+  ) {
+    return this.userInviteService.updateManyUserInvite(body, code);
+  }
+
+  @Patch(':code/update-sports-carnival-status')
+  async updateSportsCarnivalStatus(
+    @Param('code') code: string,
+    @Body() body: { userId; scstatus: string }[],
+  ) {
+    return this.userInviteService.updateManyUserSportsCarnival(body, code);
+  }
+
+  @Patch(':code/update-invite')
+  async updateInvite(
+    @Param('code') code: string,
+    @Body() body: Prisma.InviteUpdateInput,
   ) {
     return this.inviteService.updateInvite({
       where: { code: code },
-      data: inviteBody,
+      data: body,
     });
   }
 
@@ -65,9 +85,18 @@ export class InviteController {
     return this.inviteService.invites({});
   }
 
+  @Public()
   @Get(':code')
-  async getInvite(@Param('code') code: string) {
-    return this.inviteService.invite({ code: code });
+  async getInvite(@Res() res, @Param('code') code: string) {
+    console.log('Code:', code);
+    const invite = await this.inviteService.invite({ code: code });
+    if (invite) {
+      console.log('Invite found:', invite);
+      return res.status(200).send(invite);
+    } else {
+      console.log('Invite not found');
+      return res.status(404).send('Invite not found');
+    }
   }
 
   @Get(':code/invitees')

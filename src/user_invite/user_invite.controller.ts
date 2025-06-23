@@ -1,18 +1,39 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
   Param,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { UserInviteService } from './user_invite.service';
 import { Prisma } from '@prisma/client';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('user-invites')
 export class UserInviteController {
   constructor(private readonly userInviteService: UserInviteService) {}
+
+  @Get(':inviteCode/status')
+  async getUserInvite(@Param('inviteCode') inviteCode: string) {
+    const userInvite = await this.userInviteService.userInvites({
+      where: {
+        inviteCode: inviteCode,
+      },
+    });
+
+    if (userInvite.length === 0) {
+      throw new HttpException('User invite not found', HttpStatus.NOT_FOUND);
+    }
+    return {
+      users: userInvite.map((invite) => ({
+        status: invite.status,
+      })),
+    };
+  }
 
   @Post(':inviteCode')
   async addUsersToInvite(
@@ -72,6 +93,28 @@ export class UserInviteController {
       where: {
         inviteCode: inviteCode,
       },
+    });
+  }
+
+  @Delete(':inviteCode/:userId')
+  async deleteUserInvite(@Param('inviteCode') inviteCode: string, @Param('userId') userId: string) {
+    const userInvite = await this.userInviteService.userInvites({
+      where: {
+        inviteCode: inviteCode,
+        userId: userId,
+      },
+    });
+
+    if (userInvite.length === 0) {
+      throw new HttpException('User invite not found', HttpStatus.NOT_FOUND);
+    }
+
+    return this.userInviteService.deleteUserInvite({
+      userId: userId,
+      userId_inviteCode: {
+        userId: userId,
+        inviteCode: inviteCode,
+      }
     });
   }
 }

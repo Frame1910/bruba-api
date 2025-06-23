@@ -6,14 +6,11 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import {
-  Prisma,
-  RelationType,
-  Status,
-  DietaryRestriction,
-} from '@prisma/client';
+import { Prisma } from '@prisma/client';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('users')
 export class UserController {
@@ -28,9 +25,10 @@ export class UserController {
       lastName: string;
       mobile?: string | null;
       email?: string | null;
-      status: string;
-      relation: string;
-      dietary?: string[];
+      // status: string;
+      // relation: string;
+      dietary?: string;
+      allergies?: string;
     },
   ) {
     const user = {
@@ -39,11 +37,10 @@ export class UserController {
       lastName: user_body.lastName,
       mobile: user_body.mobile,
       email: user_body.email,
-      status: user_body.status as Status,
-      relation: user_body.relation as RelationType,
-      dietary: user_body.dietary.map(
-        (dietary) => dietary as DietaryRestriction,
-      ),
+      // status: user_body.status as Status,
+      // relation: user_body.relation as RelationType,
+      dietary: user_body.dietary,
+      allergies: user_body.allergies,
     };
     return this.userService.createUser(user);
   }

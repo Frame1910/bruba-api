@@ -54,11 +54,47 @@ export class UserInviteService {
     });
   }
 
+  async updateManyUserInvite(
+    statuses: { userId: string; status: string }[],
+    inviteCode: string,
+  ) {
+    const updatePromises = statuses.map(({ userId, status }) => {
+      return this.prisma.userInvite.update({
+        where: {
+          userId_inviteCode: {
+            userId: userId,
+            inviteCode: inviteCode, // Assuming all statuses have the same inviteCode
+          },
+        },
+        data: { status: status },
+      });
+    });
+    return await Promise.all(updatePromises);
+  }
+
+  async updateManyUserSportsCarnival(
+    statuses: { userId: string; scstatus: string }[],
+    inviteCode: string,
+  ) {
+    const updatePromises = statuses.map(({ userId, scstatus }) => {
+      return this.prisma.userInvite.update({
+        where: {
+          userId_inviteCode: {
+            userId: userId,
+            inviteCode: inviteCode, // Assuming all statuses have the same inviteCode
+          },
+        },
+        data: { scstatus: scstatus },
+      });
+    });
+    return await Promise.all(updatePromises);
+  }
+
   async deleteUserInvite(
     where: Prisma.UserInviteWhereUniqueInput,
   ): Promise<UserInvite> {
     return this.prisma.userInvite.delete({
-      where,
+      where
     });
   }
 }
