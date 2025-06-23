@@ -2,6 +2,7 @@ import { Controller, Get, Param } from '@nestjs/common';
 import { MetadataService } from './metadata.service';
 import { Public } from 'src/auth/functions';
 
+@Public()
 @Controller('metadata')
 export class MetadataController {
   constructor(private readonly metadataService: MetadataService) {}
