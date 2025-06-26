@@ -40,7 +40,6 @@ const userData: Prisma.UserCreateManyInput[] = [
   { id: '516bb5f2-8863-48af-afb0-6ded8b3105cd', firstName: 'Adil', lastName: 'Raza Zaidi' },
   { id: 'b9dfb259-9f2f-41ea-b812-6e11089ad382', firstName: 'Sijay', lastName: 'Parhanah' },
   { id: '96f50329-ece4-485a-b5b7-f9c737987fc5', firstName: 'Patryk', lastName: 'Malinowski' },
-  { id: 'b4aa88dc-791c-4184-be19-601596033ded', firstName: 'Tashi', lastName: 'Deki' },
   { id: 'f9491044-8929-4a27-8aa8-3bd4ea4695d1', firstName: 'Nathan', lastName: 'Cusack' },
   { id: 'e66e5134-7c84-4e27-83a1-87d3091b98f6', firstName: 'Caoimhe', lastName: 'Hennigan' },
   { id: '3e2d8fbe-28e8-49ec-bd10-1f5fb8a97f18', firstName: 'Nia', lastName: 'Lasam' },
@@ -144,7 +143,7 @@ const inviteData: Prisma.InviteCreateManyInput[] = [
   { code: '386828', allowPlusOne: false, sportsCarnival: true },
   { code: '125840', allowPlusOne: false, sportsCarnival: true },
   { code: '792634', allowPlusOne: true, sportsCarnival: false },
-  { code: '000000', allowPlusOne: false, sportsCarnival: true },
+  { code: '240521', allowPlusOne: false, sportsCarnival: true },
 
 ];
 
@@ -187,7 +186,6 @@ const userInviteData: Prisma.UserInviteCreateManyInput[] = [
   { userId: '516bb5f2-8863-48af-afb0-6ded8b3105cd', inviteCode: '115810', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
   { userId: 'b9dfb259-9f2f-41ea-b812-6e11089ad382', inviteCode: '125840', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
   { userId: '96f50329-ece4-485a-b5b7-f9c737987fc5', inviteCode: '554135', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
-  { userId: 'b4aa88dc-791c-4184-be19-601596033ded', inviteCode: '554135', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
   { userId: 'f9491044-8929-4a27-8aa8-3bd4ea4695d1', inviteCode: '763836', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
   { userId: 'e66e5134-7c84-4e27-83a1-87d3091b98f6', inviteCode: '763836', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
   { userId: '3e2d8fbe-28e8-49ec-bd10-1f5fb8a97f18', inviteCode: '550886', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
@@ -231,8 +229,8 @@ const userInviteData: Prisma.UserInviteCreateManyInput[] = [
   { userId: '5c9651ed-4f79-4a3e-8949-f9508c7deecd', inviteCode: '844642', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
   { userId: '34cd1f89-fbc9-4b1b-a9d7-ca10dff5ceef', inviteCode: '386828', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
   { userId: 'e86bfa68-c941-4ff7-9e63-9aa4370c3f16', inviteCode: '792634', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
-  { userId: '111aa111-aaaa-1a1a-11aa-1aa1111a1a11', inviteCode: '000000', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
-  { userId: '111aa111-aaaa-1a1a-aa11-1aa1111a1a11', inviteCode: '000000', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '111aa111-aaaa-1a1a-11aa-1aa1111a1a11', inviteCode: '240521', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
+  { userId: '111aa111-aaaa-1a1a-aa11-1aa1111a1a11', inviteCode: '240521', isPlusOne: false, status: 'PENDING', scstatus: 'PENDING' },
 ];
 
 const metadata: Prisma.MetadataCreateManyInput[] = [
